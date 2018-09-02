@@ -26,7 +26,7 @@ namespace IdlePhix
 			~Game() { }
 
 			/// <summary>
-			/// Event loop.
+			/// Event loop. Processes and handles window events and user-input.
 			/// </summary>
 			void processEvents();
 			/// <summary>
@@ -34,7 +34,7 @@ namespace IdlePhix
 			/// </summary>
 			void update(float deltaTime);
 			/// <summary>
-			/// TODO.
+			/// TODO. Draw/render.
 			/// </summary>
 			void draw();
 			/// <summary>
@@ -60,6 +60,25 @@ namespace IdlePhix
 			/// a <see cref="deltaTime">delta time</see>.
 			/// </summary>
 			sf::Clock clock;
+
+			// Resource bla, will most likely be moved soon
+			/// <summary>
+			/// Amount of resources the player has.
+			/// </summary>
+			float resourceAmount;
+			/// <summary>
+			/// Increment resource by this value every
+			/// <see cref="incrementPeriod">incrementPeriod.</see>
+			/// </summary>
+			int incrementValue;
+			/// <summary>
+			/// Increment resources at this interval (in seconds).
+			/// </summary>
+			float incrementPeriod;
+			/// <summary>
+			/// SFML Text drawable to display the amount of resources.
+			/// </summary>
+			sf::Text resourceText;
 	};
 }
 
