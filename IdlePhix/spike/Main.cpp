@@ -46,7 +46,7 @@ int main()
 		// Limit framerate to 60
 		if (deltaTime > 1.0f / 60.0f)
 			deltaTime = 1.0f / 60.0f;
-		
+
 		score += incrementValue * (deltaTime / incrementPeriod);
 		text.setString(std::to_string((int)score));
 
@@ -117,7 +117,7 @@ int main()
 
 		// Clear the window
 		window.clear(sf::Color::Black);
-		
+
 		// Draw
 		window.draw(text);
 
