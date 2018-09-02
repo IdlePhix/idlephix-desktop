@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <memory>
+#include "Player.h"
 
 /// <summary>
 /// Namespace for the IdlePhix game. Contains all the classes required for the game.
@@ -61,22 +62,11 @@ namespace IdlePhix
 			/// </summary>
 			sf::Clock clock;
 
+			Player player;
+
 			// Resource bla, will most likely be moved soon
 			/// <summary>
-			/// Amount of resources the player has.
-			/// </summary>
-			float resourceAmount;
-			/// <summary>
-			/// Increment resource by this value every
-			/// <see cref="incrementPeriod">incrementPeriod.</see>
-			/// </summary>
-			int incrementValue;
-			/// <summary>
-			/// Increment resources at this interval (in seconds).
-			/// </summary>
-			float incrementPeriod;
-			/// <summary>
-			/// SFML Text drawable to display the amount of resources.
+			/// SFML Text drawable to display the amount of player resources.
 			/// </summary>
 			sf::Text resourceText;
 	};
