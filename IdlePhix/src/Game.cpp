@@ -12,12 +12,22 @@ IdlePhix::Game::Game()
 	else
 		std::cout << "[DEBUG] Loaded game font from file." << std::endl;
 
+	// Set up for resource bla. Will most likely be moved.
+	resourceAmount = 0;
+	incrementValue = 1;
+	incrementPeriod = 1;
+
+	resourceText.setFont(gameFont);
+	// resourceText.setCharacterSize(30); // Default is 30
+	resourceText.setFillColor(gameTextColor);
+	resourceText.setPosition(30, 20);
 }
 
 void IdlePhix::Game::processEvents()
 {
 	sf::Event event;
 	// While there are pending events
+	// Check all the window's events that were triggered since the last iteration of the loop
 	while (renderWindow.pollEvent(event))
 	{
 		// Check the event type
@@ -36,17 +46,18 @@ void IdlePhix::Game::processEvents()
 
 void IdlePhix::Game::update(float deltaTime)
 {
-	// Not yet implemented
-	// resourceAmount += incrementValue * (deltaTime / incrementPeriod);
-	// resourceText.setString(std::to_string((int) resourceAmount));
+	resourceAmount += incrementValue * (deltaTime / incrementPeriod);
+	resourceText.setString(std::to_string((int) resourceAmount));
 }
 
 void IdlePhix::Game::draw()
 {
 	// Clear the window
 	renderWindow.clear(clearColor);
+
 	// Add data to the buffer
-	// renderWindow.draw(resourceText);
+	renderWindow.draw(resourceText);
+
 	// Copy buffer to render window
 	renderWindow.display();
 }
@@ -57,19 +68,11 @@ void IdlePhix::Game::run()
 
 	while (renderWindow.isOpen())
 	{
-		// 0. Calculate time between frames
+		// Calculate time elapsed between frames
 		deltaTime = clock.restart().asSeconds();
-
-		// 1. Process and handle events
-		// Check all the window's events that were triggered since the last iteration of the loop
 		processEvents();
-
-		// 2. Update
 		update(deltaTime);
-
-		// 3. Draw/render
 		draw();
-
 		// End of current frame
 	}
 }
