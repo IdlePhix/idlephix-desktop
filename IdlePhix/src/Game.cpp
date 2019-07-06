@@ -43,7 +43,7 @@ void IdlePhix::Game::processEvents()
 void IdlePhix::Game::update(float deltaTime)
 {
 	player.update(deltaTime);
-	resourceText.setString(std::to_string((int) player.getResourceAmount()));
+	resourceText.setString("Wood: " + std::to_string((int) player.getResourceAmount()));
 }
 
 void IdlePhix::Game::draw()

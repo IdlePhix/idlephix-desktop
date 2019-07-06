@@ -11,13 +11,13 @@
 namespace IdlePhix
 {
 	/// <summary>
-	/// Main game class used to initialize the game, create a window and perform the main loop.
+	/// Main game class.
 	/// </summary>
 	class Game
 	{
 		public:
 			/// <summary>
-			/// TODO
+			/// Default constructor. Creates and initializes the SFML window and other necessary resources.
 			/// </summary>
 			Game();
 
@@ -31,15 +31,15 @@ namespace IdlePhix
 			/// </summary>
 			void processEvents();
 			/// <summary>
-			/// TODO.
+			/// Updates the game state.
 			/// </summary>
 			void update(float deltaTime);
 			/// <summary>
-			/// TODO. Draw/render.
+			/// Draws content onto the game window.
 			/// </summary>
 			void draw();
 			/// <summary>
-			/// Game main loop.
+			/// Performs the game's main loop.
 			/// </summary>
 			void run();
 		private:
