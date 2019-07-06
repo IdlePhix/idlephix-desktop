@@ -13,6 +13,7 @@ IdlePhix::Game::Game()
 		std::cout << "[DEBUG] Loaded game font from file." << std::endl;
 
 	// Set up for resource bla. Will most likely be moved.
+	player.addItemToInventory("Wood", 0);
 	resourceText.setFont(gameFont);
 	// resourceText.setCharacterSize(30); // Default is 30
 	resourceText.setFillColor(gameTextColor);
@@ -43,7 +44,8 @@ void IdlePhix::Game::processEvents()
 void IdlePhix::Game::update(float deltaTime)
 {
 	player.update(deltaTime);
-	resourceText.setString("Wood: " + std::to_string((int) player.getResourceAmount()));
+	// resourceText.setString(std::to_string((int) player.getResourceAmount()));
+	resourceText.setString(std::to_string(player.getItemCount("Wood")));
 }
 
 void IdlePhix::Game::draw()

@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <memory>
+#include "Player.h"
 
 /// <summary>
 /// Namespace for the IdlePhix game. Contains all the classes required for the game.
@@ -10,13 +11,13 @@
 namespace IdlePhix
 {
 	/// <summary>
-	/// Main game class used to initialize the game, create a window and perform the main loop.
+	/// Main game class.
 	/// </summary>
 	class Game
 	{
 		public:
 			/// <summary>
-			/// TODO
+			/// Default constructor. Creates and initializes the SFML window and other necessary resources.
 			/// </summary>
 			Game();
 
@@ -30,15 +31,15 @@ namespace IdlePhix
 			/// </summary>
 			void processEvents();
 			/// <summary>
-			/// TODO.
+			/// Updates the game state.
 			/// </summary>
 			void update(float deltaTime);
 			/// <summary>
-			/// TODO. Draw/render.
+			/// Draws content onto the game window.
 			/// </summary>
 			void draw();
 			/// <summary>
-			/// Game main loop.
+			/// Performs the game's main loop.
 			/// </summary>
 			void run();
 		private:
@@ -61,22 +62,11 @@ namespace IdlePhix
 			/// </summary>
 			sf::Clock clock;
 
+			Player player;
+
 			// Resource bla, will most likely be moved soon
 			/// <summary>
-			/// Amount of resources the player has.
-			/// </summary>
-			float resourceAmount;
-			/// <summary>
-			/// Increment resource by this value every
-			/// <see cref="incrementPeriod">incrementPeriod.</see>
-			/// </summary>
-			int incrementValue;
-			/// <summary>
-			/// Increment resources at this interval (in seconds).
-			/// </summary>
-			float incrementPeriod;
-			/// <summary>
-			/// SFML Text drawable to display the amount of resources.
+			/// SFML Text drawable to display the amount of player resources.
 			/// </summary>
 			sf::Text resourceText;
 	};
