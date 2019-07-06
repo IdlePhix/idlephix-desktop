@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include <memory>
 #include "Player.h"
+#include "Logger.h"
 
 /// <summary>
 /// Namespace for the IdlePhix game. Contains all the classes required for the game.
@@ -69,6 +70,11 @@ namespace IdlePhix
 			/// SFML Text drawable to display the amount of player resources.
 			/// </summary>
 			sf::Text resourceText;
+
+			/// <summary>
+			/// Instance of <see cref="Logger">Logger</see> for logging.
+			/// </summary>
+			Logger m_logger;
 	};
 }
 

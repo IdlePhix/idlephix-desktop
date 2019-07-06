@@ -4,13 +4,13 @@
 IdlePhix::Game::Game()
 {
 	renderWindow.create(videoMode, gameTitle);
-	std::cout << "[DEBUG] RenderWindow created." << std::endl;
+	m_logger.log("DEBUG", "RenderWindow created.");
 	renderWindow.setFramerateLimit(framerateLimit);
 
 	if (!gameFont.loadFromFile(gameFontFilePath))
-		std::cout << "[ERROR] Unable to load font from file." << std::endl;
+		m_logger.log("ERROR", "Unable to load font from file: " + gameFontFilePath);
 	else
-		std::cout << "[DEBUG] Loaded game font from file." << std::endl;
+		m_logger.log("DEBUG", "Loaded game font from file: " + gameFontFilePath);
 
 	// Set up for resource bla. Will most likely be moved.
 	resourceText.setFont(gameFont);
@@ -30,7 +30,7 @@ void IdlePhix::Game::processEvents()
 		switch (event.type)
 		{
 			case sf::Event::Closed:
-				std::cout << "[INFO] Exiting." << std::endl;
+				m_logger.log("INFO", "Exiting.");
 				renderWindow.close();
 				break;
 			// Don't case about any other events
@@ -60,7 +60,7 @@ void IdlePhix::Game::draw()
 
 void IdlePhix::Game::run()
 {
-	std::cout << "[INFO] Welcome to IdlePhix." << std::endl;
+	m_logger.log("INFO", "Welcome to IdlePhix.");
 
 	while (renderWindow.isOpen())
 	{
