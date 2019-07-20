@@ -1,16 +1,19 @@
 #include "../include/Game.h"
 #include <iostream>
 
-IdlePhix::Game::Game()
+IdlePhix::Game::Game() :
+	player("Zoey", "Rak'Tika Greatwood", "Hume", "Female", 1, 0)
 {
 	renderWindow.create(videoMode, gameTitle);
-	m_logger.log("DEBUG", "RenderWindow created.");
+	logger.log("DEBUG", "RenderWindow created.");
 	renderWindow.setFramerateLimit(framerateLimit);
 
 	if (!gameFont.loadFromFile(gameFontFilePath))
-		m_logger.log("ERROR", "Unable to load font from file: " + gameFontFilePath);
+		logger.log("ERROR", "Unable to load font from file: " + gameFontFilePath);
 	else
-		m_logger.log("DEBUG", "Loaded game font from file: " + gameFontFilePath);
+		logger.log("DEBUG", "Loaded game font from file: " + gameFontFilePath);
+
+	// player = { "Zoey", "Rak'Tika Greatwood", "Hume", "Female", 1, 0 };
 
 	// Set up for resource bla. Will most likely be moved.
 	resourceText.setFont(gameFont);
@@ -30,10 +33,10 @@ void IdlePhix::Game::processEvents()
 		switch (event.type)
 		{
 			case sf::Event::Closed:
-				m_logger.log("INFO", "Exiting.");
+				logger.log("INFO", "Exiting.");
 				renderWindow.close();
 				break;
-			// Don't case about any other events
+			// Don't care about any other events
 			default:
 				break;
 		}
@@ -42,8 +45,12 @@ void IdlePhix::Game::processEvents()
 
 void IdlePhix::Game::update(float deltaTime)
 {
+	// player.inventory.getItems()->at(0).update(deltaTime);
 	player.update(deltaTime);
-	resourceText.setString("Wood: " + std::to_string((int) player.getResourceAmount()));
+	resourceText.setString("Wood: " + std::to_string(player.inventory.getItemAmount(1)));
+	// resourceText.setString("Wood: " + std::to_string(player.inventory.getItems()->at(0).amount));
+	// std::cout << player.inventory.getItems()->at(1).amount << std::endl;
+	std::cout << player.inventory.getItemAmount(1) << std::endl;
 }
 
 void IdlePhix::Game::draw()
@@ -60,12 +67,16 @@ void IdlePhix::Game::draw()
 
 void IdlePhix::Game::run()
 {
-	m_logger.log("INFO", "Welcome to IdlePhix.");
+	logger.log("INFO", "Welcome to IdlePhix.");
 
 	while (renderWindow.isOpen())
 	{
 		// Calculate time elapsed between frames
 		deltaTime = clock.restart().asSeconds();
+		// FIXME (investigate alternatives): Force-limit framerate to 60
+		/*if (deltaTime > 1.0f / 60.0f)
+			deltaTime = 1.0f / 60.0f;*/
+
 		processEvents();
 		update(deltaTime);
 		draw();

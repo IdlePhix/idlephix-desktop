@@ -74,7 +74,7 @@ namespace IdlePhix
 			/// <summary>
 			/// Instance of <see cref="Logger">Logger</see> for logging.
 			/// </summary>
-			Logger m_logger;
+			Logger logger;
 	};
 }
 
