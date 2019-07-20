@@ -33,9 +33,8 @@ namespace IdlePhix
 		std::string name;
 		ItemType type;
 		std::string description;
-		// int amount; // TODO make it a double?
 		// std::string skillReward;
-		int expReward;
+		int expReward; // ????
 		// int cost; // buy price
 		// int value; // sell price
 
@@ -49,8 +48,7 @@ namespace IdlePhix
 		Gemstone gemstoneSlot5;
 		Gemstone gemstoneSlot6;
 
-		float amountBuffer = 0.0;
-		float incrementPerSecond = 1; // TODO set to 0 initially
+		double amountBuffer = 0.0; // TODO move this
 
 		/// <summary>
 		/// Width of the item's rectangle.
@@ -66,35 +64,9 @@ namespace IdlePhix
 		/// </summary>
 		// sf::Texture texture;
 
-		/// <summary>
-		/// Pure virtual method to handle events of the item.
-		/// </summary>
-		// virtual void handleEvents() = 0;
-
-		/// <summary>
-		/// Updates the item state.
-		/// </summary>
-		///
-		/// <param name="deltaTime">
-		/// The time elapsed between frames (in seconds).
-		/// </param>
-		void update(float deltaTime)
-		{
-			/*
-			amountBuffer += incrementPerSecond * deltaTime;
-			if (amountBuffer >= 1)
-			{
-				amount += 1;
-				amountBuffer = 0.0;
-			}*/
-			// TODO pass for now
-			return;
-		}
-
-		/// <summary>
-		/// Pure virtual method for drawing the item.
-		/// </summary>
-		// virtual void draw() = 0;
+		// void handleEvents();
+		// void update(float deltaTime);
+		// void draw();
 
 		friend bool operator==(const Item& lhs, const Item& rhs)
 		{

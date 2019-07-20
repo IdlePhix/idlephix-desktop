@@ -23,6 +23,7 @@ namespace IdlePhix
 				{ironOre.id, ironOre}
 			};
 
+			// TODO: Constructor is a bit verbose?
 			Player(
 				std::string playerName,
 				std::string playerHomeTown,
@@ -39,6 +40,7 @@ namespace IdlePhix
 
 			void update(float deltaTime);
 
+			// TODO: temporarily public for Game's update() method
 			Inventory inventory;
 		private:
 			std::string name;
@@ -47,6 +49,9 @@ namespace IdlePhix
 			std::string gender;
 			int level;
 			int experience;
+
+			// Map of item ID to a double that specifies how many of the item the player earns per second
+			std::map<unsigned int, double> incrementValues;
 	};
 }
 

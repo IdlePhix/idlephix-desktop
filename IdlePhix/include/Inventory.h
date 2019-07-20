@@ -25,14 +25,11 @@ namespace IdlePhix
 			void addItem(unsigned int id, int amount = 1);
 			void removeItem(unsigned int id);
 			bool hasItem(unsigned int id);
-			// bool hasItem(std::string name);
-			// Item getItem(Item item);
-			Item getItemById(unsigned int id);
-			// Item getItemByName(std::string name);
+			// Item& getItem(unsigned int id);
 			int getItemAmount(unsigned int id);
-			void setItemAmount(unsigned int id, int amount);
+			// void setItemAmount(unsigned int id, int amount);
 			void incrementItemAmount(unsigned int id, int amount = 1);
-			std::map<unsigned int, int> getItems();
+			std::map<unsigned int, int>& getItems();
 			int getCapacity();
 			int getAvailableCapacity();
 			int getUsedCapacity();

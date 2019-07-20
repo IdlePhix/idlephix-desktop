@@ -73,7 +73,7 @@ int IdlePhix::Inventory::getItemAmount(unsigned int id)
 	}
 }
 
-void IdlePhix::Inventory::setItemAmount(unsigned int id, int amount)
+/* void IdlePhix::Inventory::setItemAmount(unsigned int id, int amount)
 {
 	// TODO
 	auto inventoryIterator = m_items.find(id);
@@ -88,7 +88,7 @@ void IdlePhix::Inventory::setItemAmount(unsigned int id, int amount)
 	else {
 		logger.log("DEBUG", "setItemAmount: Did not find item in player inventory.");
 	}
-}
+} */
 
 void IdlePhix::Inventory::incrementItemAmount(unsigned int id, int amount)
 {
@@ -107,7 +107,7 @@ void IdlePhix::Inventory::incrementItemAmount(unsigned int id, int amount)
 	}
 }
 
-std::map<unsigned int, int> IdlePhix::Inventory::getItems()
+std::map<unsigned int, int>& IdlePhix::Inventory::getItems()
 {
 	return m_items;
 }

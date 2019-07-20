@@ -1,6 +1,5 @@
 #include "../include/Player.h"
 
-
 IdlePhix::Player::Player(
 	std::string playerName, std::string playerHomeTown, std::string playerRace,
 	std::string playerGender, int playerLevel, int playerExp) :
@@ -9,66 +8,35 @@ IdlePhix::Player::Player(
 {
 	// Every player starts with some initial items
 	inventory.addItem(1); // Add wood to inventory
+	incrementValues.insert_or_assign(1, 1); // Make Wood increase by 1 each second
 }
 
+/* TODO: This is a mess */
 void IdlePhix::Player::update(float deltaTime)
 {
-	// Look up item and its increment value
+	// Loop through all items in player's inventory
 	for (auto &pair : inventory.getItems())
 	{
+		// Look up the item in the lookup table
 		auto it = itemLookupTable.find(pair.first);
 		if (it != itemLookupTable.end())
 		{
-			it->second.amountBuffer += it->second.incrementPerSecond * deltaTime;
-			if (it->second.amountBuffer >= 1)
+			// If the item exists (which it always should?!)
+			// Look up the increment stat the player has for this item, if any
+			auto incrementValueIterator = incrementValues.find(pair.first);
+			if (incrementValueIterator != incrementValues.end())
 			{
-				inventory.incrementItemAmount(pair.first, 1);
-				it->second.amountBuffer = 0.0;
+				// Add a portion of the increment value (based on the time elapsed between frames)
+				// to a buffer in the item (TODO probably should move this buffer)
+				it->second.amountBuffer += incrementValueIterator->second * deltaTime;
+				// If the buffer reaches 1 or above, increment the item amount and then
+				// reset the buffer
+				if (it->second.amountBuffer >= 1)
+				{
+					inventory.incrementItemAmount(pair.first, 1);
+					it->second.amountBuffer = 0.0;
+				}
 			}
-			it->second.update(deltaTime);
 		}
 	}
 }
-
-/*
-float IdlePhix::Player::getResourceAmount()
-{
-	return m_resourceAmount;
-}
-
-void IdlePhix::Player::addItemToInventory(Item item, int amount) {
-	if (m_inventory.hasItem(item)) {
-		m_inventory.getItem(item).setAmount(amount);
-	}
-	else {
-		m_inventory.addItem(item, amount);
-	}
-	// auto it = inventory.find(name)
-	/*
-	std::map<std::string, int>::iterator inventoryIterator = inventory.find(name);
-	if (inventoryIterator != inventory.end())
-	{
-		// If the item is already in the player's inventory, increment its current amount
-		inventoryIterator->second += amount;
-	}
-	else
-	{
-		// Add item to inventory, with specified amount
-		inventory[name] = amount;
-	}
-	*/
-// }
-
-/*
-int IdlePhix::Player::getItemAmount(Item item)
-{
-	if (m_inventory.hasItem(item))
-		return m_inventory.getItem(item).getAmount();
-	else
-		return 0;
-}
-
-IdlePhix::Inventory IdlePhix::Player::getInventory()
-{
-	return m_inventory;
-}*/
