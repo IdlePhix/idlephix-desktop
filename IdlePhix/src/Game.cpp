@@ -33,7 +33,7 @@ void IdlePhix::Game::processEvents()
 		switch (event.type)
 		{
 			case sf::Event::Closed:
-				logger.log("INFO", "Exiting.");
+				logger.log("DEBUG", "Closing RenderWindow.");
 				renderWindow.close();
 				break;
 			// Don't care about any other events
@@ -48,9 +48,7 @@ void IdlePhix::Game::update(float deltaTime)
 	// player.inventory.getItems()->at(0).update(deltaTime);
 	player.update(deltaTime);
 	resourceText.setString("Wood: " + std::to_string(player.inventory.getItemAmount(1)));
-	// resourceText.setString("Wood: " + std::to_string(player.inventory.getItems()->at(0).amount));
-	// std::cout << player.inventory.getItems()->at(1).amount << std::endl;
-	std::cout << player.inventory.getItemAmount(1) << std::endl;
+	// std::cout << player.inventory.getItemAmount(1) << std::endl;
 }
 
 void IdlePhix::Game::draw()
@@ -68,18 +66,14 @@ void IdlePhix::Game::draw()
 void IdlePhix::Game::run()
 {
 	logger.log("INFO", "Welcome to IdlePhix.");
-
 	while (renderWindow.isOpen())
 	{
 		// Calculate time elapsed between frames
 		deltaTime = clock.restart().asSeconds();
-		// FIXME (investigate alternatives): Force-limit framerate to 60
-		/*if (deltaTime > 1.0f / 60.0f)
-			deltaTime = 1.0f / 60.0f;*/
-
 		processEvents();
 		update(deltaTime);
 		draw();
 		// End of current frame
 	}
+	logger.log("INFO", "Exiting.");
 }

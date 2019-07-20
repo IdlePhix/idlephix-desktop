@@ -23,32 +23,21 @@ namespace IdlePhix
 				{ironOre.id, ironOre}
 			};
 
-			Player(std::string playerName, std::string playerHomeTown, std::string playerRace, std::string playerGender, int playerLevel = 1, int playerExp = 0) :
-				name(playerName), homeTown(playerHomeTown), race(playerRace), gender(playerGender), level(playerLevel), experience(playerExp)
-			{
-				// Every player starts with some initial items
-				inventory.addItem(1); // Add wood to inventory
-			}
+			Player(
+				std::string playerName,
+				std::string playerHomeTown,
+				std::string playerRace,
+				std::string playerGender,
+				int playerLevel = 1,
+				int playerExp = 0
+			);
 
-			void update(float deltaTime)
-			{
-				// Look up item and its increment value
-				for (auto &pair : inventory.getItems())
-				{
-					auto it = itemLookupTable.find(pair.first);
-					if (it != itemLookupTable.end())
-					{
-						it->second.amountBuffer += it->second.incrementPerSecond * deltaTime;
-						if (it->second.amountBuffer >= 1)
-						{
-							inventory.incrementItemAmount(pair.first, 1);
-							// pair.second += 1;
-							it->second.amountBuffer = 0.0;
-						}
-						it->second.update(deltaTime);
-					}
-				}
-			}
+			/// <summary>
+			/// Default class destructor.
+			/// </summary>
+			~Player() { }
+
+			void update(float deltaTime);
 
 			Inventory inventory;
 		private:

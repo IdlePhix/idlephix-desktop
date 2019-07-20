@@ -1,24 +1,36 @@
-// #include "../include/Player.h"
+#include "../include/Player.h"
 
-/*
-IdlePhix::Player::Player()
+
+IdlePhix::Player::Player(
+	std::string playerName, std::string playerHomeTown, std::string playerRace,
+	std::string playerGender, int playerLevel, int playerExp) :
+	name(playerName), homeTown(playerHomeTown), race(playerRace),
+	gender(playerGender), level(playerLevel), experience(playerExp)
 {
-	// Set up for resource bla. Will most likely be moved.
-	m_resourceAmount = 0;
-	incrementValue = 1;
-	incrementPeriod = 5;
-
-	m_wood = Wood();
-	addItemToInventory(m_wood);
+	// Every player starts with some initial items
+	inventory.addItem(1); // Add wood to inventory
 }
 
 void IdlePhix::Player::update(float deltaTime)
 {
-	int resourcesToAdd = (int)(incrementValue * (deltaTime / incrementPeriod));
-	m_resourceAmount += incrementValue * (deltaTime / incrementPeriod);
-	m_inventory.getItem(m_wood).incrementAmount();
+	// Look up item and its increment value
+	for (auto &pair : inventory.getItems())
+	{
+		auto it = itemLookupTable.find(pair.first);
+		if (it != itemLookupTable.end())
+		{
+			it->second.amountBuffer += it->second.incrementPerSecond * deltaTime;
+			if (it->second.amountBuffer >= 1)
+			{
+				inventory.incrementItemAmount(pair.first, 1);
+				it->second.amountBuffer = 0.0;
+			}
+			it->second.update(deltaTime);
+		}
+	}
 }
 
+/*
 float IdlePhix::Player::getResourceAmount()
 {
 	return m_resourceAmount;
@@ -45,8 +57,7 @@ void IdlePhix::Player::addItemToInventory(Item item, int amount) {
 		inventory[name] = amount;
 	}
 	*/
-
-//}
+// }
 
 /*
 int IdlePhix::Player::getItemAmount(Item item)
